@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Enderecos")
 @Getter // Gerar todos os getters necessários.
+@Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
 public class Endereco {
@@ -20,11 +22,8 @@ public class Endereco {
     @Column(name = "cep", nullable = false)
     private String cep;
 
-    @Column(name = "rua", nullable = false)
-    private String rua;
-
-    @Column(name = "numero", nullable = false)
-    private String numero;
+    @Column(name = "logradouro", nullable = false)
+    private String logradouro;
 
     @Column(name = "complemento", nullable = false)
     private String complemento;
@@ -32,15 +31,17 @@ public class Endereco {
     @Column(name = "bairro", nullable = false)
     private String bairro;
 
-    @Column(name = "cidade", nullable = false)
-    private String cidade;
+    @Column(name = "localidade", nullable = false)
+    private String localidade;
 
-    @Column(name = "estado", nullable = false)
-    private String estado;
+    @Column(name = "uf", nullable = false)
+    private String uf;
 
-    @Column(name = "pais", nullable = false)
-    private String pais;
+    @Column(name = "numero", nullable = false)
+    private String numero;
 
+
+//    Relacionamentos
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;

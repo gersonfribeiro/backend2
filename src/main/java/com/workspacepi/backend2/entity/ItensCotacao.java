@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "Itens")
 @Getter // Gerar todos os getters necessários.
+@Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItensCotacao {
@@ -26,11 +28,11 @@ public class ItensCotacao {
     @Column(name = "observacoes", nullable = false)
     private String observacoes;
 
+//    Relacionamentos
     @ManyToOne
     @JoinColumn(name = "id_cotacao")
     private SolicitarCotacao solicitarCotacao;
 
-    // Nova relação com ResponderCotacaoItem
     @OneToOne(mappedBy = "itemCotacao", cascade = CascadeType.ALL)
     private ResponderCotacaoItem responderCotacaoItem;
 }

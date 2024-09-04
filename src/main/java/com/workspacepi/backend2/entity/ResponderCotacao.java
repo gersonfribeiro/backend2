@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "Cotacoes_respondidas")
-@Getter
+@Getter // Gerar todos os getters necessários.
+@Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponderCotacao {
@@ -17,6 +19,7 @@ public class ResponderCotacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    Relacionamentos
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;

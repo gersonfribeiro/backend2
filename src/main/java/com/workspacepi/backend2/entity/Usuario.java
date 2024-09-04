@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Usuarios")
 @Getter // Gerar todos os getters necessários.
+@Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
@@ -26,6 +28,9 @@ public class Usuario {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "e_mail", unique = true, nullable = false)
+    private String email;
+
     @Column(name = "cnpj")
     private String cnpj;
 
@@ -35,6 +40,7 @@ public class Usuario {
     @Column(name = "nome_empresa")
     private String nomeEmpresa;
 
+//    Relacionamentos
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Telefone> telefone = new HashSet<>();
 
