@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "Enderecos")
 @Getter // Gerar todos os getters necessários.
@@ -15,9 +17,9 @@ import lombok.Setter;
 public class Endereco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_endereco")
-    private Long id;
+    private UUID id;
 
     @Column(name = "cep", nullable = false)
     private String cep;

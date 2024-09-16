@@ -9,22 +9,21 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Telefones")
+@Table(name = "Imagens")
 @Getter // Gerar todos os getters necessários.
 @Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
-public class Telefone {
-
+public class Imagens {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_telefone")
+    @Column(name = "id_imagem")
     private UUID id;
 
-    @Column(name = "telefone", length = 20)
-    private String telefone;
+    @Column(name = "url_imagem")
+    private String url_imagem;
 
-//  Relacionamentos
+//    Relacionamentos
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;

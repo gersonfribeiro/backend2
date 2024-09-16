@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.awt.*;
+import java.util.UUID;
+
 @Entity
 @Table(name = "Respostas_itens")
 @Getter // Gerar todos os getters necessários.
@@ -14,25 +17,23 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponderCotacaoItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id_resposta")
+    private UUID id;
 
     @Column(name = "preco_oferecido", nullable = false)
     private Double precoOferecido;
 
     @Column(name = "observacoes")
-    private String observacoes;
+    private TextArea observacoes;
 
-//    Relacionamentos
+//  Relacionamentos
     @OneToOne
     @JoinColumn(name = "id_item_cotacao", nullable = false)
     private ItensCotacao itemCotacao;
 
     @ManyToOne
-    @JoinColumn(name = "id_resposta_cotacao", nullable = false)
-    private ResponderCotacao responderCotacao;
+    @JoinColumn(name = "id_resposta_item", nullable = false)
+    private ItensCotacao itensCotacao;
 
 }
-
-
-

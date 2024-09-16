@@ -1,6 +1,6 @@
 package com.workspacepi.backend2.enumns;
 
-public enum Status {
+public enum StatusEnumns {
     ENVIANDO,
     RESPOSTA_PENDENTE,
     RESPOSTA_ENVIADO,

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Usuarios")
@@ -18,36 +19,35 @@ import java.util.Set;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_usuario")
-    private Long id;
+    private UUID id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "nome_usuario", length = 50)
+    private String nome_usuario;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "senha_criptografada")
+    private String senha_criptografada;
 
-    @Column(name = "e_mail", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false, length = 70)
     private String email;
 
-    @Column(name = "cnpj")
-    private String cnpj;
 
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-
-    @Column(name = "nome_empresa")
-    private String nomeEmpresa;
-
-//    Relacionamentos
+//  Relacionamentos
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Telefone> telefone = new HashSet<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Endereco> endereco = new HashSet<>();
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Imagens> imagens = new HashSet<>();
+
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SolicitarCotacao> solicitarCotacaos = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa empresa;
 
 }

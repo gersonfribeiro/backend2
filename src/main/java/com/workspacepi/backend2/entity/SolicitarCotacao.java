@@ -1,7 +1,6 @@
 package com.workspacepi.backend2.entity;
 
-import com.workspacepi.backend2.enumns.Categorias;
-import com.workspacepi.backend2.enumns.Status;
+import com.workspacepi.backend2.enumns.StatusEnumns;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,33 +8,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Table(name = "Solicitacoes")
+@Table(name = "Cotacoes")
 @Getter // Gerar todos os getters necessários.
 @Setter // Gerar todos os setters necessários.
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolicitarCotacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "Id_cotacao")
-    private Long id;
+    private UUID id;
 
     @CreationTimestamp
     @Column(name = "data_solicitacao")
-    private Instant creationTimestamp;
-
-    @Column(name = "categoria")
-    private Categorias categoria;
+    private Timestamp data_registro = Timestamp.from(Instant.now());
 
     @Column(name = "status")
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private StatusEnumns status;
 
-//    Relacionamentos
+//  Relacionamentos
     @ManyToOne
     @JoinColumn(name = "id_autor", nullable = false)
     private Usuario autor;
@@ -44,6 +43,6 @@ public class SolicitarCotacao {
     private Set<ItensCotacao> itensCotacao = new HashSet<>();
 
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ResponderCotacao> respostaCotacao = new HashSet<>();
+    private Set<Destinatarios> respostaCotacao = new HashSet<>();
 
 }
